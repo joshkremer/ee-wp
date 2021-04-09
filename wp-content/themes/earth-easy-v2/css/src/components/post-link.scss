@@ -1,0 +1,237 @@
+.post-link {
+	background: $gray;
+	position: relative;
+
+	&__image {
+		-webkit-backface-visibility: hidden;
+		display: block;
+		opacity: 0.8;
+	}
+	&__content {
+		-webkit-backface-visibility: hidden;
+		padding: 0 20px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		text-align: center;
+		transform: translate(-50%, -50%);
+		width: 100%;
+		max-width: 800px;
+		z-index: 1;
+
+		@include mq(lg) {
+			padding: 0 40px;
+		}
+		@include mq(xl) {
+			padding: 0 60px;
+		}
+	}
+	&__title {
+		@include font-size($m4-font-sizes);
+		color: $white;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		margin: 0;
+		text-transform: uppercase;
+
+		&--sm {
+			font-size: 12px !important;
+
+			@include mq(md) {
+				font-size: 13px !important;
+			}
+			@include mq(xl) {
+				font-size: 14px !important;
+			}
+		}
+		&--md {
+			@include font-size($body-font-sizes);
+		}
+		&--lg {
+			@include font-size($l1-font-sizes);
+			font-family: $serif;
+			font-weight: 300;
+			letter-spacing: 0;
+			text-transform: none;
+		}
+
+		a {
+			color: $white;
+		}
+	}
+	&__description {
+		@include font-size($m1-font-sizes);
+		color: $white;
+		display: none;
+		font-family: $serif;
+		margin: 10px 0 0;
+
+		@include mq(sm) {
+			display: block;
+		}
+	}
+	&__meta {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		justify-content: center;
+		align-items: center;
+		padding: 0 10px;
+		position: absolute;
+		top: 10px;
+		left: 0;
+		width: 100%;
+		z-index: 1;
+
+		@include mq(md) {
+			padding: 0 30px;
+			top: 15px;
+		}
+	}
+	&__type {
+		border: 2px solid $white;
+		border-radius: 30px;
+		color: $white;
+		display: inline-block;
+		font-size: 8px;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		margin-right: 8px;
+		padding: 2px 5px;
+		text-transform: uppercase;
+		transition: color 0.3s ease, background 0.3s ease;
+		vertical-align: middle;
+
+		@include mq(md) {
+			font-size: 9px;
+			margin-right: $pad;
+		}
+
+		&:hover {
+			background: $white;
+			color: $gray;
+		}
+	}
+	&__categories {
+		display: inline-block;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		vertical-align: middle;
+
+		li {
+			margin-bottom: 0;
+			white-space: nowrap;
+		}
+		a {
+			color: $white;
+			display: block;
+			font-size: 8px;
+			font-weight: 700;
+			letter-spacing: 0.1em;
+			text-transform: uppercase;
+
+			@include mq(md) {
+				font-size: 9px;
+			}
+
+			&:hover {
+				color: $purple;
+
+				path {
+					fill: $purple;
+				}
+			}
+		}
+		svg {
+			display: inline-block;
+			fill: $white;
+			transition: fill 0.3s ease;
+			vertical-align: middle;
+		}
+		img,
+		span {
+			display: inline-block;
+			vertical-align: middle;
+		}
+		path {
+			transition: fill 0.3s ease;
+		}
+	}
+	&__hover {
+		background-size: cover;
+		display: block;
+		position: relative;
+		width: 100%;
+		height: 180px;
+
+		@include mq(xs) {
+			height: 200px;
+		}
+		@include mq(sm) {
+			height: 220px;
+		}
+		@include mq(md) {
+			height: 240px;
+		}
+		@include mq(lg) {
+			height: 260px;
+		}
+		@include mq(xl) {
+			height: 300px;
+		}
+
+		&:before {
+			background: $gray;
+			content: '';
+			opacity: 0.4;
+			position: absolute;
+			top: 0;
+			left: 0;
+			transition: opacity 0.3s ease;
+			width: 100%;
+			height: 100%;
+		}
+
+		&:hover {
+			&:before {
+				opacity: 0.8;
+			}
+		}
+		
+		&--lg {
+			height: 220px;
+
+			@include mq(xs) {
+				height: 260px;
+			}
+			@include mq(sm) {
+				height: 300px;
+			}
+			@include mq(md) {
+				height: 340px;
+			}
+			@include mq(lg) {
+				height: 360px;
+			}
+			@include mq(xl) {
+				height: 400px;
+			}
+		}
+	}
+	.btn {
+		margin-top: 20px;
+
+		@include mq(md) {
+			margin-top: 30px;
+		}
+	}
+	.tags {
+		display: none;
+		margin-left: auto;
+
+		@include mq(xs) {
+			display: block;
+		}
+	}
+}

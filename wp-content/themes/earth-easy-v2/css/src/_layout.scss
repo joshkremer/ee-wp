@@ -1,0 +1,165 @@
+.site-wrap {
+	overflow-x: hidden;
+	position: relative;
+}
+
+.container {
+	margin: 0 auto;
+	position: relative;
+	width: 100%;
+	max-width: 1440px;
+
+	&--xl {
+		padding-left: $pad;
+		padding-right: $pad;
+	}
+	&--lg {
+		padding-left: $pad;
+		padding-right: $pad;
+		max-width: 1262px;
+
+		@include mq(sm) {
+			padding-left: $pad * 2;
+			padding-right: $pad * 2;
+		}
+	}
+	&--md {
+		padding-left: $pad;
+		padding-right: $pad;
+		max-width: 1020px;
+
+		@include mq(sm) {
+			padding-left: $pad * 2;
+			padding-right: $pad * 2;
+		}
+	}
+	&--sm {
+		padding-left: $pad;
+		padding-right: $pad;
+		max-width: 776px;
+
+		@include mq(sm) {
+			padding-left: $pad * 2;
+			padding-right: $pad * 2;
+		}
+	}
+}
+
+.site-main {
+	margin-top: 70px;
+
+	@include mq(md) {
+		margin-top: 85px;
+	}
+	@include mq(xl) {
+		margin-top: 100px;
+	}
+}
+
+
+.content {
+
+	&__title {
+		@include font-size($s1-font-sizes);
+		font-family: $sans;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		margin-bottom: $pad;
+		text-align: center;
+		text-transform: uppercase;
+
+		@include mq(sm) {
+			margin-bottom: $pad * 2;
+		}
+		@include mq(lg) {
+			margin-bottom: $pad * 3;
+		}
+
+		&.content__title--sm {
+			@include font-size($s2-font-sizes);
+
+			@include mq(sm) {
+				margin-bottom: $pad;
+			}
+			@include mq(lg) {
+				margin-bottom: $pad * 2;
+			}
+		}
+	}
+
+	&--shop {
+		padding: $pad * 2 0;
+
+		@include mq(sm) {
+			padding: $pad * 3 0;
+		}
+		@include mq(md) {
+			padding: $pad * 4 0;
+		}
+		@include mq(lg) {
+			padding: $pad * 5 0;
+		}
+
+		.col-xs-6 {
+			&:last-child {
+				display: none;
+
+				@include mq(sm) {
+					display: inline-block;
+				}
+			}
+		}
+	}
+	&--trending {
+		padding-top: $pad * 2;
+
+		@include mq(md) {
+			padding-top: $pad * 3;
+		}
+
+		.col-xs-6 {
+			&:last-child {
+				display: none;
+
+				@include mq(md) {
+					display: inline-block;
+				}
+			}
+		}
+	}
+	&--divider {
+		border-bottom: 1px solid $ltgray;
+	}
+	&--related {
+		border-bottom: 0;
+		padding-top: $pad * 2;
+		padding-bottom: $pad * 2;
+		position: relative;
+
+		@include mq(sm) {
+			padding-top: $pad * 3;
+			padding-bottom: $pad * 3;
+		}
+		@include mq(md) {
+			padding-top: $pad * 4;
+			padding-bottom: $pad * 4;
+		}
+		@include mq(lg) {
+			padding-top: $pad * 5;
+		}
+		@include mq(xl) {
+			padding-top: $pad * 6;
+		}
+
+		&__icon {
+			display: block;
+			position: absolute;
+			top: -25px;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+		svg {
+			fill: $gray;
+		}
+	}
+}

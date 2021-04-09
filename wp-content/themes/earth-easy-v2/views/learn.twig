@@ -1,0 +1,211 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+		
+<section class="posts_carousel">
+	{#<div id="post_slider" class="owl-carousel owl-theme">#}
+	<div id="post_slider">
+		{% for cat_post in category_posts %}
+		{% set featured = TimberPost(cat_post) %}
+		{% if loop.index <= 3 %}
+		<article class="post-link overlay_{{featured.id}}" id='{{featured.id}}'>
+			<div class="container">
+			<footer class="post-link__meta">
+			{% if featured.post_type == 'ee_guides' %}
+			<a class="post-link__type" href="{{site.url}}/guides/">Guides</a>
+			{% elseif featured.post_type == 'ee_articles' %}
+			<a class="post-link__type" href="{{site.url}}/articles/">Articles</a>
+			{% endif %}
+			<div class="tags tags--toggle">
+			</div>
+			<ul class="selector__categories">
+				{% if featured.post_type == 'ee_articles' %}
+				{% set cat_name =  cat_post.get_terms('articles-categories')|first %}
+				{% elseif featured.post_type == 'ee_guides' %}
+				{% set cat_name =  cat_post.get_terms('guides-categories')|first %}
+				{% endif %}
+				 {% if cat_name|default %}
+					<li>
+						<input type="radio" id="filter-{{cat_name|lower|replace({' ':'-'})}}" name="filter_category" value="{{cat_name}}" />
+						<a data-id="{{cat_name.id}}" data-type='{{cat_name.taxonomy}}' target="_self" href="
+						{% if featured.post_type == 'ee_guides' %}{{site.link}}/guides-categories/{{cat_name.slug|lower|replace({' ':'-'})}}/
+						{% elseif featured.post_type == 'ee_articles' %}{{site.link}}/articles-categories/{{cat_name.slug|lower|replace({' ':'-'})}}/
+						{% endif %}">
+							<label for="filter-{{cat_name|lower|replace({' ':'-'})}}">
+								{% if featured.post_type == 'ee_articles' %}
+									<img src="{{cat_name.category_icon.url}}" />
+								{% elseif featured.post_type == 'ee_guides' %}
+									<img src="{{cat_name.category_icon.url}}" />
+								{% endif %}
+								<span>{{cat_name}}</span>
+							</label>
+						</a>
+					</li>
+				{% endif %}
+			</ul>
+			</footer>
+		  </div>
+			<div class="post-link__hover post-link__hover--lg owl-lazy" data-src="{{TimberImage(featured.featured_image).src}}" style="background-image: url('data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=');">
+			<div class="post-link__content">
+			<h3 class="post-link__title">{{featured.title}}</h3>
+			<!--<div class="post-info">
+			<span>{{post.date}}</span>
+			{% if featured.post_type == 'ee_guides' %}
+				{% set post_author = featured.custom.guide_author  %}
+			{% elseif featured.post_type == 'ee_articles' %}
+				{% set post_author = featured.custom.article_author  %}
+			{% endif %}
+			<span>WRITTEN BY 
+				{% if post_author is not empty  %}
+					{{post_author}}
+				{% else %}
+					{{post.author.name}}
+				{% endif %}
+			</span>
+			</div>-->
+			<span class="banner__title_line">
+						<img src="{{ site.theme.link }}{{filePath}}/img/carousel-item-line.png" alt="">
+					</span>
+			<a href="{{featured.link}}">
+				Read {% if featured.post_type == 'ee_guides' %}Guide{% elseif featured.post_type == 'ee_articles' %}Article{% endif %}
+			</a>
+			</div>
+			</div>
+			<style>
+				.overlay_{{featured.id}} .post-link__hover:before
+				{
+					opacity: {{featured.custom.overlay_opacity}};
+				}
+			</style>
+		</article>
+		{% endif %}
+		{% endfor %}
+	</div>
+</section>
+
+		
+
+
+	<div class=" container--xl">
+		<div class="row row--16">
+			<div class="page-title">
+				<h2>
+					<span>Recent Articles & Guides</span>
+				</h2>
+		 	</div>
+		</div>
+	</div>
+
+	<section class="content pad--b-1 archive-container">
+		<div class=" container--xl">
+			<div class="row row--16">
+				{% for cat_post in category_posts %}
+					{% set featured = TimberPost(cat_post) %}
+				 	{% if loop.index >= 4 %}
+					<div class="{% if loop.index < 8 %}col-sm-6{% else %} col-sm-4{% endif %}">
+						<article class="post-link overlay_{{featured.id}}" id='{{featured.id}}'>
+							<a class="post-link__hover {% if loop.index < 8 %}post-link__hover--lg{% endif %} lazyload" data-bg="{{TimberImage(featured.featured_image).src|resize(720,450)}}" href="{{featured.link}}" style="background-image: url('data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=');">
+								<div class="post-link__content">
+									<h3 class="post-link__title">{{featured.title}}</h3>
+								</div>
+							</a>
+							<footer class="post-link__meta">
+								{% if featured.post_type == 'ee_guides' %}
+									<a class="post-link__type" href="{{site.url}}/guides">Guides</a>
+								{% elseif featured.post_type == 'ee_articles' %}
+									<a class="post-link__type" href="{{site.url}}/articles">Articles</a>
+								{% endif %}
+								<div class="tags tags--toggle">
+									{# <button class="tags__btn">
+										<svg viewBox="0 0 12 13" width="12" height="13" class="icon--hash" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+										    <use xlink:href="#icon-hash-13"></use>
+										</svg>
+									</button> #}
+								</div>
+								<ul class="selector__categories">
+									{% if featured.post_type == 'ee_articles' %}
+									{% set cat_name =  cat_post.get_terms('articles-categories')|first %}
+									{% elseif featured.post_type == 'ee_guides' %}
+									{% set cat_name =  cat_post.get_terms('guides-categories')|first %}
+									{% endif %}
+
+									{% if cat_name|default %}
+										<li>
+											<input type="radio" id="filter-{{cat_name|lower|replace({' ':'-'})}}" name="filter_category" value="{{cat_name}}" />
+											<a data-id="{{cat_name.id}}" target="_self" href="
+											{% if featured.post_type == 'ee_guides' %}{{site.link}}/guides-categories/{{cat_name.slug|lower}}/
+											{% elseif featured.post_type == 'ee_articles' %}{{site.link}}/articles-categories/{{cat_name.slug|lower}}/
+											{% endif %}">
+												<label for="filter-{{cat_name|lower|replace({' ':'-'})}}">
+													{% if featured.post_type == 'ee_articles' %}
+														<img src="{{cat_name.category_icon.url}}" />
+													{% elseif featured.post_type == 'ee_guides' %}
+														<img src="{{cat_name.category_icon.url}}" />
+													{% endif %}
+													<span>{{cat_name}}</span>
+												</label>
+											</a>
+										</li>
+									{% endif %}
+								</ul>
+							</footer>
+							{#
+							<div class="tags__menu">
+								<div class="tags__menu--inner">
+									<p>Tagged With</p>
+									<ul class="tags__list">
+										{% for tag in featured.tags %}
+											<li><a href="{{site.url}}/learn?tag={{tag.name}}">{{tag.name}}</a></li>
+										{% endfor %}
+									</ul>
+									<button class="tags__close" title="Close">
+										<svg viewBox="0 0 27 27" width="27" height="27" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+										    <use xlink:href="#icon-close-circle"></use>
+										</svg>
+									</button>
+								</div>
+							</div>
+							#}
+							<style>
+							.overlay_{{featured.id}} .post-link__hover:before
+							{
+							opacity: {{featured.custom.overlay_opacity}};
+							}
+							</style>
+						</article>
+					</div>
+				{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+
+		<div class="archive-load-more load-more container container--lg">
+			<a class="btn btn--black btn--ghost">Load More</a>
+			<div id="content" class="hide"><img alt="" src="https://learn.eartheasy.com/site-files//2018/03/loading.gif" width="100" height="100" align="center" /></div>
+		</div>
+	</section>
+	{% if learn_products %}
+	<section class="content shop-product">
+		<div class="container container--xl">
+			<div class="row row--16">
+				<div class="page-title">
+					<h2>
+						<span>From Our Shop</span>
+					</h2>
+			 	</div>
+				<div class="products_slider owl-carousel owl-theme">
+					{% for product in learn_products %}
+						<div class="product-item">
+							<a class="product-img owl-lazy" data-src="{{product.image_url}}" style="background-image:url('data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=')" href='//eartheasy.com{{product.custom_url}}'></a>
+							<a href='//eartheasy.com{{product.custom_url}}'>
+							<p>{{product.name}}</p>
+							</a>
+						</div>
+					{% endfor %}
+				</div>
+ 			</div>
+		</div>
+	</section>
+	{% endif %}
+{% endblock %}

@@ -1,0 +1,457 @@
+{% extends "base.twig" %}
+{% block content %}
+<style>
+.banner:before
+{
+	background: #000 !important;
+	{% if post.custom.overlay_opacity is not empty  %}
+	opacity: {{post.custom.overlay_opacity}} ;
+	{% else %}
+	opacity: .5;
+	{% endif %}
+}
+</style>
+{% for item in post.get_field('guide') %}
+	{% if item.acf_fc_layout == 'banner' %}
+		<section class="banner lazyload" {% if item.banner_video %}data-bg="{{TimberImage(item.banner_image).src|resize(1440,900)}}"{% else %}data-bg="{{TimberImage(item.banner_image).src|resize(1440,900)}}"{% endif %} style="background-image: url('data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=');">
+			{% if item.banner_video %}
+				<div class="banner__video">
+					<div data-vide-bg="mp4: {{TimberImage(item.banner_video).src}}, poster: {{TimberImage(item.banner_image).src|resize(1440,900)}}" data-vide-options="posterType: jpg, loop: true, muted: true, position: 50% 50%">
+					</div>
+				</div>
+			{% endif %}
+			<div class="container">
+				<div class="banner__content hero-caption" style="display: none;">
+					<h1 class="banner__title">{{post.title}}</h1>
+
+					<p class="banner__description">{{item.banner_sub_title}}</p>
+
+					<div class="btns">
+						<a href="#" class="scroll-down">Read Guide <span class="arrow-down"><svg height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg"><path d="M17.17 32.92l9.17-9.17-9.17-9.17 2.83-2.83 12 12-12 12z" fill="#ffffff"/></svg></span></a>
+
+						{% if post.button_link_url %} 
+							{% if post.button_link_url is iterable %}
+								{% set btn_button_link = '#' %}
+								{% for button_link_url in post.button_link_url %}
+									{% set btn_button_link = button_link_url %}
+								{% endfor %}
+								
+								{% set btn_button_label = 'Shop Products' %}
+								{% for button_label in post.button_label %}
+									{% set btn_button_label = button_label %}
+								{% endfor %}
+								
+								<a href="{{ btn_button_link }}" target="_blank">{% if btn_button_label %} {{ btn_button_label }} {% else %} Shop Products {% endif %} <span><svg height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg"><path d="M17.17 32.92l9.17-9.17-9.17-9.17 2.83-2.83 12 12-12 12z" fill="#ffffff"/></svg></span></a>
+							{% else %}
+								<a href="{{ post.button_link_url }}" target="_blank">{% if post.button_label %} {{ post.button_label }} {% else %} Shop Products {% endif %} <span><svg height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg"><path d="M17.17 32.92l9.17-9.17-9.17-9.17 2.83-2.83 12 12-12 12z" fill="#ffffff"/></svg></span></a>
+							{% endif %}
+						{% endif %}
+					</div>
+				</div>
+				<footer class="banner__meta">
+					<a class="banner__type" href="{{site.url}}/guides/">Guides</a>
+					{% set cat_name =  post.get_terms('guides-categories')|first %}
+					{% if cat_name|default %}
+					<ul class="banner__categories">
+						<li>
+							<a href="{{site.url}}/guides-categories/{{cat_name.slug}}/">
+								<img src="{{TimberImage(cat_name.category_icon_white).src}}" alt="{{cat_name.name}} icon" />
+								<span class="single-article-name" data-cat-custom-name="{{cat_name.slug|lower}}">{{cat_name.name}}</span>
+								<input type="hidden" id="cat_name" value="{{cat_name.name}}">
+							</a>
+						</li>
+					</ul>
+					{% endif %}
+				</footer>
+			</div>
+			{% if item.banner_cta %}
+				<div class="banner__cta text--center">
+					<div class="container container--lg">
+						<p>{{item.cta_text}}</p><a class="btn btn--ghost btn--white btn--sm" href="{{item.cta_link}}">{{item.cta_button}}</a>
+					</div>
+				</div>
+			{% endif %}
+		</section>
+	{% endif %}
+{% endfor %}
+<article class="post">
+
+	{% for item in post.get_field('guide') %}
+
+		{% if item.acf_fc_layout == 'introduction' %}
+
+			<section class="post-intro">
+				<div class="post-content container container--sm text--center">
+					<h6>{{item.introduction}}</h6>
+				</div>
+			</section>
+
+		{% elseif item.acf_fc_layout == 'section_break' %}
+
+			<section class="post-break" id="{{item.navigation_title|lower|replace({' ':'-'})}}">
+
+				<div class="post-title container container--md text--center">
+					<h2>{{item.title}}</h2>
+					{% if item.break_cta %}
+						<p>{{item.cta_text}}</p>
+						<a class="btn btn--ghost btn--black btn--sm" href="{{item.cta_url}}">{{item.cta_button}}</a>
+					{% endif %}
+					{% if item.break_intro %}
+						<h6>{{item.break_intro_text}}</h6>
+					{% endif %}
+				</div>
+			</section>
+
+		{% elseif item.acf_fc_layout == 'content' %}
+
+			<section class="post-section">
+				<div class="container container--sm">
+					{% if item.content_title %}
+						<h2>{{item.content_title}}</h2>
+					{% endif %}
+					{{item.content_text}}
+				</div>
+			</section>
+
+		{% elseif item.acf_fc_layout == 'slider' %}
+
+			<section class="post-section post-slider">
+				{% if item.slider_title %}
+					<div class="container container--md text--center">
+						<h2 class="slider__title">{{item.slider_title}}</h2>
+					</div>
+				{% endif %}
+				{% if item.slider_type == 'Images with Description' %}
+					<div class="slider slider--posts bg--ltrgray">
+						{% for slide in item.slider_description %}
+							<div class="slider__item">
+								<img class="slider__image" src="" data-lazy="{{TimberImage(slide.slide_image).src|resize(950,580)}}" />
+								<div class="slider__content container container--sm">
+									<div class="row">
+										<div class="col-8">
+											<h4>{{slide.description_title}}</h4>
+											{{slide.description_text|wpautop}}
+										</div>
+										{% if slide.cta_url and slide.cta_button %}
+											<div class="col-4">
+												<a class="btn btn--ghost btn--black btn--wide" href="{{slide.cta_url}}">{{slide.cta_button}}</a>
+											</div>
+										{% endif %}
+									</div>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				{% endif %}
+				{% if item.slider_type == 'Images with Steps' %}
+					<div class="slider slider--posts bg--ltrgray">
+						{% for slide in item.slider_steps %}
+							<div class="slider__item">
+								<img class="slider__image" src="" data-lazy="{{TimberImage(slide.slide_image).src|resize(950,580)}}" />
+									<div class="slider__content container container--sm">
+										<h6>Step {{loop.index|convertNumberToWord}}</h6>
+										<p><strong>{{slide.step_title}}</strong></p>
+										{{slide.step_text}}
+									</div>
+							</div>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</section>
+
+		{% elseif item.acf_fc_layout == 'products' %}
+
+			<section class="post-section post-shop">
+				<div class="container products-flex">
+					<h2>{{item.products_title}}</h2>
+					<div class="container-intro-text">{{item.products_intro_text}}</div>
+					{% for product_id in item.products_list %}
+						{% for product in guide_layout_products %}
+							{% if product_id == product.id %}
+			{% if product.is_visible == true%}
+							<div class="product-item">
+							<a class="product-img owl-lazy" data-src="{{product.image_url}}" style="background-image:url('data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=')" href='//eartheasy.com{{product.custom_url}}'></a>
+							<a href='//eartheasy.com{{product.custom_url}}'>
+							<p>{{product.name}}</p>
+							</a>
+						</div>
+							{% endif %}
+			{% endif %}
+						{% endfor %}
+					{% endfor %}
+				</div>
+			</section>
+
+		{% elseif item.acf_fc_layout == 'full_image' %}
+
+			{% if item.video %}
+				<div class="post-banner {% if item.video %}post-banner--video{% endif %}" style="background-image:url({{TimberImage(item.image).src}});">
+					<div class="post-banner__video" data-video="{{TimberImage(item.video).src}}" data-poster="{{TimberImage(item.image).src|resize(1440,900)}}">
+					</div>
+				</div>
+			{% else %}
+				<div class="post-banner lazyload" data-parallax="scroll" data-bg="{{TimberImage(item.image).src|resize(1440,900)}}" data-speed="0.7">
+				</div>
+			{% endif %}
+
+		{% elseif item.acf_fc_layout == 'columns' %}
+
+			<section class="post-section">
+				<div class="post-columns container container--md">
+					<div class="row row--24">
+						{% for col in item.columns %}
+							{% set loop_number = loop.index %}
+							<div class="{{col.column_width}}">
+								{% for item in col.column_content %}
+									{% if item.acf_fc_layout == 'content_block' %}
+										<div class="post-col">
+											<h4 class="post-col__title">{{item.block_title}}</h4>
+											<div class="post-col__content">
+												{% if item.block_icon %}
+													<img class="post-col__icon {% if loop_number is odd %}post-col__icon--left{% else %}post-col__icon--right{% endif %}" src="{{TimberImage(item.block_icon).src}}" width="{{TimberImage(item.block_icon).width/2}}" height="{{TimberImage(item.block_icon).height/2}}" />
+												{% endif %}
+												{{item.block_text|wpautop}}
+											</div>
+										</div>
+									{% elseif item.acf_fc_layout == 'quote' %}
+										<div class="post-quote {% if loop_number is odd %}post-quote--left{% else %}post-quote--right{% endif %}">
+											<blockquote>
+												{{item.quote}}
+												{% if item.quote_credit %}
+													<footer>
+														<cite>{{item.quote_credit}}</cite>
+													</footer>
+												{% endif %}
+											</blockquote>
+										</div>
+									{% endif %}
+								{% endfor %}
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			</section>
+
+		{% elseif item.acf_fc_layout == 'fulll_width_image' %}
+		<section class="post-section post-section--wide post-section-guide-fw">
+		<div class="fulll_width_image">
+		<div style='background-image: url({{TimberImage(item.image).src}}); padding-bottom: 45%;background-size: cover;'></div>
+		<div class="container container--sm ">
+		  <p>{{item.image_caption}}</p>
+		</div>
+		</div>
+		</section>	
+
+		{% elseif item.acf_fc_layout == 'boxes' %}
+			<section class="post-section">
+				<div class="container container--md">
+				{% for box in item.boxes %}
+
+						<div class="post-block {% if box.box_type == 'Alert' %}post-block--danger{% endif %}">
+							<h3 class="text--center">{{box.box_title}}</h3>
+							<div class="container container--sm">
+								<div class="row">
+									{% if box.box_columns|length == '1' %}
+										{% set col_class = 'col-12' %}
+									{% else %}
+										{% set col_class = 'col-6' %}
+									{% endif %}
+									{% for col in box.box_columns %}
+										<div class="{{col_class}}">
+											{{col.box_text|wpautop}}
+										</div>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+				{% endfor %}
+			</div>
+			</section>
+			{% elseif item.acf_fc_layout == 'guide_tabs' %}
+			<section class="post-section">
+				<div class="container container--sm">
+				 	<div class="guide_tab_list custom-tab-design-guide">
+				 		{{item.tab_list}}
+				    </div>
+				</div>
+			</section>
+		{% endif %}
+	{% endfor %}
+
+</article>
+
+	<section class="post-section">
+
+		<div class="container article-disqus-box container--sm">
+
+			<a href="#" class="toggle-comments"><img src="{{ site.theme.link }}{{filePath}}/img/comment.svg" alt=""> <strong>Responses</strong> ({{feed_count}})</a>
+			<span class="disqus-comment-count" data-disqus-url="{{post.link}}" data-disqus-identifier="{{post.id}} {{post.guid}}" style="display:none;">{{post.title}} - {{feed_count}}</span>	
+
+			<div id="disqus_thread"></div>
+			<script>
+			    /**
+			     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+			     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+			     */
+			    /*
+			    */
+			    var disqus_config = function () {
+			        this.page.url = '{{post.link}}';  // Replace PAGE_URL with your page's canonical URL variable
+			        this.page.identifier = '{{post.id}} {{post.guid}}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+			    };
+			    (function() {  // DON'T EDIT BELOW THIS LINE
+			        var d = document, s = d.createElement('script');
+			        
+			        s.src = 'https://eartheasy.disqus.com/embed.js';
+			        
+			        s.setAttribute('data-timestamp', +new Date());
+			        (d.head || d.body).appendChild(s);
+			    })();
+			</script>
+			<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+		</div>
+
+	</section>
+
+
+{% if (select_type == 'category' or select_type == 'product_ids' or select_type == 'product') and related_products_art %}
+		<section class="content shop-product custom-nav">
+			<div class=" container--xl">
+				<div class="row row--16">
+					<div class="page-title">
+						<h2>
+							<span>From Our Shop</span>
+						</h2>
+				 	</div>
+					<div class="products_slider owl-carousel owl-theme">
+						{% for product in related_products_art %}
+							<div class="product-item">
+							<a class="product-img owl-lazy" data-src="{{product.image_url}}" style="background-image:url('data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=')" href='//eartheasy.com{{product.custom_url}}'></a>
+							<a href='//eartheasy.com{{product.custom_url}}'>
+							<p>{{product.name}}</p>
+							</a>
+						</div>
+						{% endfor %}
+					</div>
+	 			</div>
+			</div>
+		</section>
+{% elseif article_products %}
+		<section class="content shop-product custom-nav">
+			<div class=" container--xl">
+				<div class="row row--16">
+					<div class="page-title">
+						<h2>
+							<span>From Our Shop</span>
+						</h2>
+				 	</div>
+					<div class="products_slider owl-carousel owl-theme">
+						{% for product in article_products %}
+							<div class="product-item">
+							<a class="product-img owl-lazy" data-src="{{product.image_url}}" style="background-image:url('data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=')" href='//eartheasy.com{{product.custom_url}}'></a>
+							<a href='//eartheasy.com{{product.custom_url}}'>
+							<p>{{product.name}}</p>
+							</a>
+						</div>
+						{% endfor %}
+					</div>
+	 			</div>
+			</div>
+		</section>
+{% else %}
+	{% if archive_products %}
+		<section class="content shop-product custom-nav">
+			<div class=" container--xl">
+				<div class="row row--16">
+					<div class="page-title">
+						<h2>
+							<span>From Our Shop</span>
+						</h2>
+				 	</div>
+					<div class="products_slider owl-carousel owl-theme">
+						{% for product in archive_products %}
+							<div class="product-item">
+							<a class="product-img owl-lazy" data-src="{{product.image_url}}" style="background-image:url('data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=')" href='//eartheasy.com{{product.custom_url}}'></a>
+							<a href='//eartheasy.com{{product.custom_url}}'>
+							<p>{{product.name}}</p>
+							</a>
+						</div>
+						{% endfor %}
+					</div>
+	 			</div>
+			</div>
+		</section>
+	{% endif %}
+{% endif %}
+<section class="content content--related">
+	<div class="container--xl">
+		<div class="page-title">
+		 <h2 class="content__title"><span>Related Guides</span></h2>
+		</div>
+		<div class="row row--16 grid">
+			{% for item in related_posts %}
+					{% set column_class = 'col-xs-6 col-md-4' %}
+
+				<div class="{{column_class}} grid-item">
+					<article class="post-link">
+						<a class="post-link__hover owl-lazy lazyload" href="{{item.link}}" data-bg="{{TimberImage(item.featured_image).src|resize(615,300)}}">
+							<div class="post-link__content">
+								<h3 class="post-link__title">{{item.title}}</h3>
+							</div>
+						</a>
+						<footer class="post-link__meta">
+							{% if item.post_type == 'ee_guides' %}
+								{% set link_type = 'Guides' %}
+								{% set link_url = '/guides' %}
+							{% elseif item.post_type == 'ee_articles' %}
+								{% set link_type = 'Articles' %}
+								{% set link_url = '/articles' %}
+							{% endif %}
+							<a class="post-link__type" href="{{site.url}}{{link_url}}/">{{link_type}}</a>
+							<div class="tags tags--toggle">
+							</div>
+							<ul class="selector__categories">
+								{% if item.post_type == 'ee_articles' %}
+								{% set cat_name =  item.get_terms('articles-categories')|first %}
+								{% elseif item.post_type == 'ee_guides' %}
+								{% set cat_name =  item.get_terms('guides-categories')|first %}
+								{% endif %}
+								<div data-rel='{{cat_name|json_encode()}}'></div>
+									{% if cat_name|default %}
+										<li>
+											<input type="radio" id="filter-{{cat_name|lower|replace({' ':'-'})}}" name="filter_category" value="{{cat_name}}" />
+											<a data-id="{{item.id}}" data-type="{% if item.post_type == 'ee_guides' %}{{site.link}}ee_guides
+											{% elseif item.post_type == 'ee_articles' %}ee_articles
+											{% endif %}" target="_self" href="
+											{% if item.post_type == 'ee_guides' %}{{site.link}}/guides-categories/{{cat_name.slug|lower}}
+											{% elseif item.post_type == 'ee_articles' %}{{site.link}}/articles-categories/{{cat_name.slug|lower}}
+											{% endif %}/">
+												<label for="filter-{{cat_name|lower|replace({' ':'-'})}}">
+													{% if item.post_type == 'ee_articles' %}
+														<img src="{{cat_name.category_icon.url}}" />
+													{% elseif item.post_type == 'ee_guides' %}
+														<img src="{{cat_name.category_icon.url}}" />
+													{% endif %}
+													<span>{{cat_name}}</span>
+												</label>
+											</a>
+										</li>
+									{% endif %}
+								</ul>
+						</footer>
+					</article>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+	{% if all_related %}
+		{# do nothing #}
+	{% else %}
+		<div class="archive-load-more container container--lg load-more">
+			<a class="btn btn--black btn--ghost" data-page_type="single-guide">Load More</a>
+			<div id="content" class="hide"><img alt="Loading..." src="https://learn.eartheasy.com/site-files//2018/03/loading.gif" width="100" height="100" align="center" /></div>
+		</div>
+	{% endif %}
+
+</section>
+{% endblock %}

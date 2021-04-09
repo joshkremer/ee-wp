@@ -1,0 +1,244 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+
+{% for item in post.get_field('home') %}
+	
+
+	{% if item.acf_fc_layout == 'banner' %}
+
+		{% set banner_post = TimberPost(item.banner_post) %}
+		<section class="banner banner--post" {% if item.banner_video %}style="background-image: url({{TimberImage(item.banner_image).src|resize(1440,900)}});"{% else %}data-parallax="scroll" data-image-src="{{TimberImage(item.banner_image).src|resize(1440,900)}}" data-speed="0.7"{% endif %}>
+			{% if banner_post.background_video %}
+				<div class="banner__video">
+					<div data-vide-bg="mp4: {{TimberImage(banner_post.background_video).src}}, poster: {{TimberImage(banner_post.featured_image).src|resize(1440,900)}}" data-vide-options="posterType: jpg, loop: true, muted: true, position: 50% 50%">
+					</div>
+				</div>
+			{% endif %}
+			<div class="container">
+				<article class="post-link">
+					<div class="post-link__content">
+						<a href="{{banner_post.link}}"><h3 class="post-link__title post-link__title--lg">{{banner_post.title}}</h3></a>
+						<p class="post-link__description">{{banner_post.excerpt}}</p>
+						<a class="btn btn--ghost btn--lg btn--white" href="{{banner_post.link}}">Read More</a>
+					</div>	
+					<footer class="post-link__meta">
+						{% if banner_post.post_type == 'ee_guides' %}
+							<a class="post-link__type" href="{{site.url}}/guides">Guides</a>
+						{% elseif banner_post.post_type == 'ee_articles' %}
+							<a class="post-link__type" href="{{site.url}}/articles">Articles</a>
+						{% endif %}
+						<ul class="post-link__categories">
+							<li>
+								<a href="{{banner_post.categories[0].link}}">
+									<img data-src="{{TimberImage(banner_post.categories[0].category_icon_white).src}}" alt="{{banner_post.categories[0].name}} icon" class="lazyload" />
+									<span>{{banner_post.categories[0].name}}</span>
+								</a>
+							</li>
+						</ul>
+						<div class="tags">
+							<ul class="tags__list">
+								{% for tag in banner_post.tags %}
+									<li><a href="{{tag.link}}">{{tag.name}}</a></li>
+								{% endfor %}
+							</ul>
+						</div>
+					</footer>
+				</article>
+			</div>
+		</section>
+
+
+
+	{% elseif item.acf_fc_layout == 'filters' %}
+		
+		{% include 'sections/filters.twig' %}
+
+
+
+	{% elseif item.acf_fc_layout == 'featured_posts' %}
+
+		<section class="content pad--b-1">
+			<div class="container">
+				<div class="row row--16">
+					{% for featured in item.posts %}
+						{% set featured = TimberPost(featured.post) %}
+						<div class="col-sm-6">
+							<article class="post-link">
+								<a class="post-link__hover post-link__hover--lg lazyload" href="{{featured.link}}" data-bg="{{TimberImage(featured.featured_image).src|resize(720,450)}}">
+									<div class="post-link__content">
+										<h3 class="post-link__title">{{featured.title}}</h3>
+									</div>
+								</a>
+								<footer class="post-link__meta">
+									{% if featured.post_type == 'ee_guides' %}
+										<a class="post-link__type" href="{{site.url}}/guides">Guides</a>
+									{% elseif featured.post_type == 'ee_articles' %}
+										<a class="post-link__type" href="{{site.url}}/articles">Articles</a>
+									{% endif %}
+									<div class="tags tags--toggle">
+										<button class="tags__btn">
+											<svg viewBox="0 0 12 13" width="12" height="13" class="icon--hash" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+											    <use xlink:href="#icon-hash-13"></use>
+											</svg>
+										</button>
+									</div>
+								</footer>
+								<div class="tags__menu">
+									<div class="tags__menu--inner">
+										<p>Tagged With</p>
+										<ul class="tags__list">
+											{% for tag in featured.tags %}
+												<li><a href="{{tag.link}}">{{tag.name}}</a></li>
+											{% endfor %}
+										</ul>
+										<button class="tags__close" title="Close">
+											<svg viewBox="0 0 27 27" width="27" height="27" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+											    <use xlink:href="#icon-close-circle"></use>
+											</svg>
+										</button>
+									</div>
+								</div>
+							</article>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+
+
+
+	{% elseif item.acf_fc_layout == 'recent_posts' %}
+
+		<section class="content pad--b-1">
+			<div class="container">
+				<div class="row row--16">
+					{% for post_id in post_id_list %}
+						{% set featured = TimberPost(post_id) %}
+						<div class="col-sm-6">
+							<article class="post-link">
+								<a class="post-link__hover post-link__hover--lg lazyload" href="{{featured.link}}" data-bg="{{TimberImage(featured.featured_image).src|resize(720,450)}}">
+									<div class="post-link__content">
+										<h3 class="post-link__title">{{featured.title}}</h3>
+									</div>
+								</a>
+								<footer class="post-link__meta">
+									{% if featured.post_type == 'ee_guides' %}
+										<a class="post-link__type" href="{{site.url}}/guides">Guides</a>
+									{% elseif featured.post_type == 'ee_articles' %}
+										<a class="post-link__type" href="{{site.url}}/articles">Articles</a>
+									{% endif %}
+									<div class="tags tags--toggle">
+										<button class="tags__btn">
+											<svg viewBox="0 0 12 13" width="12" height="13" class="icon--hash" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+											    <use xlink:href="#icon-hash-13"></use>
+											</svg>
+										</button>
+									</div>
+								</footer>
+								<div class="tags__menu">
+									<div class="tags__menu--inner">
+										<p>Tagged With</p>
+										<ul class="tags__list">
+											{% for tag in featured.tags %}
+												<li><a href="{{tag.link}}">{{tag.name}}</a></li>
+											{% endfor %}
+										</ul>
+										<button class="tags__close" title="Close">
+											<svg viewBox="0 0 27 27" width="27" height="27" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+											    <use xlink:href="#icon-close-circle"></use>
+											</svg>
+										</button>
+									</div>
+								</div>
+							</article>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+
+
+
+	{% elseif item.acf_fc_layout == 'products' %}
+
+		<section class="content content--shop bg--ltrgray">
+			<div class="container container--lg">
+				{% if item.products_title %}
+
+					<h2 class="content__title">{{item.products_title}}</h2>
+				{% endif %}
+				<div class="row row--32">
+					{% for product in item.products %}
+{% if product.is_visible == true%}
+						<div class="col-xs-6 col-sm-4">
+							{% filter shortcodes %}
+								{{product.product_shortcode}}
+							{% endfilter %}
+						</div>
+{% endif %}
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+
+
+
+	{% elseif item.acf_fc_layout == 'trending_posts' %}
+
+		<section class="content content--trending pad--b-3">
+			<div class="container">
+				<h2 class="content__title">Trending Guides &amp; Articles</h2>
+				<div class="row row--16">
+					{% for trending in item.posts %}
+						{% set trending = TimberPost(trending.post) %}
+						<div class="col-xs-6 col-md-4">
+							<article class="post-link">
+								<a class="post-link__hover lazyload" href="{{trending.link}}" data-bg="{{TimberImage(trending.featured_image).src|resize(480,300)}}">
+									<div class="post-link__content">
+										<h3 class="post-link__title post-link__title--sm">{{trending.title}}</h3>
+									</div>
+								</a>
+								<footer class="post-link__meta">
+									{% if trending.post_type == 'ee_guides' %}
+										<a class="post-link__type" href="{{site.url}}/guides">Guides</a>
+									{% elseif trending.post_type == 'ee_articles' %}
+										<a class="post-link__type" href="{{site.url}}/articles">Articles</a>
+									{% endif %}
+									<div class="tags tags--toggle">
+										<button class="tags__btn">
+											<svg viewBox="0 0 12 13" width="12" height="13" class="icon--hash" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+											    <use xlink:href="#icon-hash-13"></use>
+											</svg>
+										</button>
+									</div>
+								</footer>
+								<div class="tags__menu">
+									<div class="tags__menu--inner">
+										<p>Tagged With</p>
+										<ul class="tags__list">
+											{% for tag in trending.tags %}
+												<li><a href="{{tag.link}}">{{tag.name}}</a></li>
+											{% endfor %}
+										</ul>
+										<button class="tags__close" title="Close">
+											<svg viewBox="0 0 27 27" width="27" height="27" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+											    <use xlink:href="#icon-close-circle"></use>
+											</svg>
+										</button>
+									</div>
+								</div>
+							</article>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+
+
+	{% endif %}
+{% endfor %}
+
+
+{% endblock %}

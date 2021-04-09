@@ -1,0 +1,66 @@
+body {
+	-webkit-font-smoothing: antialiased;
+	box-sizing: border-box;
+	color: #453F43;
+	font-weight: 400;
+	font-size: 16px;
+	font-family: "Gotham SSm A", "Gotham SSm B", sans-serif;
+	height: 100%;
+}
+h1,h2,h3,h4,h5,h6,p,ul,ol,blockquote {
+	margin: 0 0 20px;
+}
+h1 {
+	font-size: 42px;
+	font-weight: 400;
+}
+h2 {
+	font-family: "Hoefler Titling A", "Hoefler Titling B", serif;
+	font-size: 32px;
+	font-weight: 300;
+}
+h3 {
+	font-size: 18px;
+	font-weight: 500;
+}
+h4 {
+	font-size: 18px;
+	font-weight: 400;
+}
+h5 {
+	font-size: 18px;
+	font-weight: 400;
+}
+h6 {
+	font-family: "Hoefler Titling A", "Hoefler Titling B", serif;
+	font-style: italic;
+	font-size: 24px;
+	font-weight: 300;
+	line-height: 1.5;
+}
+ul,
+ol {
+	padding-left: 1.25em;
+}
+ul li,
+ol li {
+  	margin-bottom: 5px;
+}
+ul ul, ul ol, ol ol, ol ul {
+	margin-bottom: 0;
+}
+a {
+	color: $blue;
+	text-decoration: none;
+	transition: color 0.3s ease;
+
+	&:hover {
+		color: $gray;
+	}
+}
+blockquote {
+	font-family: "Hoefler Titling A", "Hoefler Titling B", serif;
+	font-size: 26px;
+	font-style: italic;
+	line-height: 1.5;
+}

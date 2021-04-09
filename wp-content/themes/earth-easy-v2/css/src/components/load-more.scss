@@ -1,0 +1,14 @@
+.load-more {
+	padding: $pad * 2 0;
+	text-align: center;
+
+	@include mq(md) {
+		padding: $pad * 3 0;
+	}
+	@include mq(lg) {
+		padding: $pad * 4 0;
+	}
+	@include mq(xl) {
+		padding: $pad * 5 0;
+	}
+}

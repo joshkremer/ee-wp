@@ -1,0 +1,111 @@
+<footer class="site-footer">
+	<div class="footer-badge">
+      <img src="{{ site.theme.link }}{{filePath}}/img/eartheasy-badge.svg" alt="">
+    </div>
+	<div class="container container--lg site-footer__menu">
+		<ul>
+			<li><h3>About Eartheasy</h3></li>
+			<ul>
+				{% for item in menu_connect.items %}
+					<li><a href="{{item.link}}">{{item.title}}</a></li>
+				{% endfor %}
+			</ul>
+		</ul>
+		<ul>
+			<li><h3>Shop Categories</h3></li>
+			<ul>
+				{% for item in menu_shop.items %}
+					<li><a href="{{item.link}}">{{item.title}}</a></li>
+				{% endfor %}
+			</ul>
+		</ul>
+		<ul>
+			<li><h3>Customer Service</h3></li>
+			<ul>
+				{% for item in menu_customer.items %}
+					<li><a href="{{item.link}}">{{item.title}}</a></li>
+				{% endfor %}
+			</ul>
+		</ul>
+		<ul>
+			<li><h3>Stay Connected</h3></li>
+			<li>
+				<div class="site-footer__social">
+					<ul class="social-links">
+						{% for item in menu_social.items %}
+							<li><a href="{{item.link}}" title="{{item.title}}">
+								{% if item.title == 'Twitter' %}
+									<svg viewBox="0 0 20 18" width="20" height="18" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="#icon-twitter"></use></svg>
+								{% elseif item.title == 'Facebook' %}
+									<svg viewBox="0 0 10 20" width="10" height="20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="#icon-facebook">
+								{% elseif item.title == 'Instagram' %}
+									<svg viewBox="0 0 19 19" width="19" height="19" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="#icon-instagram"></use></svg>
+								{% elseif item.title == 'YouTube' %}
+									<svg viewBox="0 0 19 13" width="19" height="13" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="#icon-youtube"></use></svg>
+								{% elseif item.title == 'Pinterest' %}
+									<svg viewBox="0 0 20 20" width="20" height="20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="#icon-pinterest"></use></svg>
+								{% elseif item.title == 'Google Plus' %}
+									<svg viewBox="0 0 19 20" width="19" height="20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="#icon-google-plus"></use></svg>
+								{% elseif item.title == 'Tumblr' %}
+									<svg viewBox="0 0 13 20" width="13" height="20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="#icon-tumblr"></use></svg>
+								{% endif %}
+							</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+			</li>
+			<li class="footer-form"><h3>Subscribe to our newsletter</h3></li>
+			<li>
+<div id="mc_embed_signup" class="mc-form-footer">
+<form action="https://eartheasy.us2.list-manage.com/subscribe/post?u=3e5560ab4e0c3da3a9a3373b5&amp;id=4c37d9d05d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+<div class="mc-field-group">
+	<label for="EMAIL" class="hide">Email Address</label>
+	<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Email Address">
+	<input type="submit" value="Submit" name="subscribe" id="mc-embedded-subscribe" class="button">
+</div>
+
+	<div id="mce-responses" class="clear">
+		<div class="response hide" id="mce-error-response"></div>
+		<div class="response hide" id="mce-success-response"></div>
+	</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position:absolute;left:-5000px;" class="mcname" aria-hidden="true"><input type="text" name="b_3e5560ab4e0c3da3a9a3373b5_4c37d9d05d" tabindex="-1" value=""></div>
+    </div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+			</li>
+		</ul>
+	</div>
+	<div class="site-footer__tertiary">
+		<div class="container container--lg">
+			<div class="site-footer__accreditations">
+				<ul>
+					{% for item in options.footer_accreditations %}
+						<li>
+							{% if item.url %}
+								<a href="{{item.url}}">
+									<img data-src="{{TimberImage(item.image).src}}" width="{{TimberImage(item.image).width/2}}" height="{{TimberImage(item.image).height/2}}" alt="{{item.title}}" class="lazyload" />
+								</a>
+							{% else %}
+								<img data-src="{{TimberImage(item.image).src}}" width="{{TimberImage(item.image).width/2}}" height="{{TimberImage(item.image).height/2}}" alt="{{item.title}}" class="lazyload" />
+							{% endif %}
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+			<div class="site-footer__copyright">
+				&copy; {{"now"|date('Y')}} Eartheasy.com - All Rights Reserved
+			</div>
+			<div class="site-footer__payment">
+			 <ul>
+			 	<li><img src="{{ site.theme.link }}{{filePath}}/img/mastercard.svg" alt=""></li>
+			 	<li><img src="{{ site.theme.link }}{{filePath}}/img/visa.svg" alt=""></li>
+			 	<li><img src="{{ site.theme.link }}{{filePath}}/img/discover.svg" alt=""></li>
+			 	<li><img src="{{ site.theme.link }}{{filePath}}/img/amex.svg" alt="" ></li>
+			 	<li><img src="{{ site.theme.link }}{{filePath}}/img/paypal.svg" alt=""></li>
+			 </ul>
+			</div>
+		</div>
+	</div>
+</footer>

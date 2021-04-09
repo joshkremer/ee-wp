@@ -1,0 +1,70 @@
+<section class="content">
+	<div class="container container--xl">
+		<div class="selector">
+			<form class="selector__form">
+				<!--<div class="selector__type">
+					<button class="selector__type-toggle">Articles</button>
+					<ul class="selector__type-list">
+						<li><input type="radio" id="filter-guides" name="filter_type" value="Guides" /><label for="filter-guides">Guides</label></li>
+						<li><input type="radio" id="filter-articles" name="filter_type" value="Articles" /><label for="filter-articles">Articles</label></li>
+						<li><input type="radio" id="filter-everything" name="filter_type" value="Everything" /><label for="filter-everything">Everything</label></li>
+					</ul>
+					<svg viewBox="0 0 2 10" class="selector__type-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					    <use xlink:href="#icon-more"></use>
+					</svg>
+				</div>-->
+				<p class="selector__heading">I want to</p>
+				<ul class="selector__categories">
+					{% for item in categories %}
+						<li><input type="radio" id="filter-{{item.name|lower|replace({' ':'-'})}}" name="filter_category" value="{{item.name}}" /><a target="_self" href="{{site.link}}/guides/?cat={{item.name|lower}}"><label for="filter-{{item.name|lower|replace({' ':'-'})}}"><img src="{{category_icons[loop.index0].url}}" /><span>{{item.name}}</span></label></a></li>
+					{% endfor %}
+				</ul>
+				<input class="btn btn--ghost btn--black btn--sm" type="submit" value="Filter">
+			</form>
+			<div class="selector__nav selector__nav--tags">
+				<a class="selector__toggle" href=""><svg viewBox="0 0 9 10" width="9" height="10" class="icon--hash" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="#icon-hash-10"></use></svg> Tags <svg viewBox="0 0 9 4" width="9" height="4" xmlns="http://www.w3.org/2000/svg" class="icon--arrow" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="#icon-arrow-down"></use></svg></a>
+				<div class="selector__menu">
+					<ul>
+						{% for item in tags %}
+							<li><a href="{{site.link}}/guides/?tag={{item.name}}">{{item.name}} <span>{{item.count}}</span></a></li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+			<div class="selector__nav selector__nav--trending">
+				<a class="selector__toggle" href="">Trending <svg viewBox="0 0 9 4" width="9" height="4" class="icon--arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="#icon-arrow-down"></use></svg></a>
+				<div class="selector__menu">
+					<div class="row row--48">
+						<div class="col-9">
+							<h6>Articles</h6>
+							<div class="row">
+								{% for item in options.filter_trending %}
+									{% set trending = TimberPost(item.trending) %}
+									<div class="col-sm-6">
+										<article class="post-link">
+											<a class="post-link__hover lazyload" href="{{trending.link}}" data-bg="{{TimberImage(trending.featured_image).src|resize(720,450)}}">
+												<div class="post-link__content">
+													<h3 class="post-link__title post-link__title--sm">{{trending.title}}</h3>
+												</div>
+											</a>
+										</article>
+									</div>
+								{% endfor %}
+							</div>
+						</div>
+						<div class="col-3">
+							<h6>Shop</h6>
+							{% for item in options.trending_shop %}
+								<div class="shop-link">
+									<img src="{{TimberImage(item.product_image).src|resize(260,160)}}" alt="{{item.product_title}}" />
+									<p>{{item.product_title}}</p>
+									<a class="btn btn--black btn--sm" href="{{item.product_link}}">Shop Now</a>
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

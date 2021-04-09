@@ -1,0 +1,178 @@
+img {
+	max-width: 100%;
+	height: auto;
+
+	.lt-ie9 & {
+		width: auto;
+	}
+}
+
+
+%column {
+	@include font-size($body-font-sizes);
+	display: inline-block;
+	margin-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	vertical-align: top;
+	text-align: left;
+	width: 100%;
+
+	@include mq(lg) {
+		margin-bottom: $pad;
+		padding-left: $pad;
+		padding-right: $pad;
+	}
+}
+
+
+
+// preset column classes ala bootstrap - granular control of columns
+
+@each $name, $mq in $breakpoints {
+
+	@for $i from 1 through 12 {
+		.col-#{$name}-#{$i} {
+			@extend %column;
+		}
+	}
+	
+	@for $i from 1 through 12 {
+		.col-#{$name}-#{$i} {
+			@include mq(#{$mq}) {
+				@include col(12,$i);
+			}
+		}
+	}
+
+}
+
+
+// preset column classes ala skeleton - < tablet = 1 col
+// this is just the same thing as .col-md-*
+@for $i from 1 through 12 {
+	.col-#{$i} {
+		@extend .col-md-#{$i};
+	}
+}
+
+
+// Nested columns: use this class on a column that contains columns
+// @extend this on the parent of @column
+// Effectively acts like a .row in other frameworks
+// This removes inline-block whitespace.
+// We can't use 0 because of Ice Cream Sandwich
+%has-col {
+	font-size: 0.001px;
+	margin-left: -10px;
+	margin-right: -10px;
+	margin-bottom: -10px;
+}
+
+.has-col,
+.row {
+	@extend %has-col;
+	@include hpad(0);
+	text-align: center;
+
+	&--flex {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: stretch;
+	}
+	&--0 {
+		margin-left: 0;
+		margin-right: 0;
+		margin-bottom: 0;
+
+		> [class^=col] {
+			margin-bottom: 0;
+			padding-left: 0px;
+			padding-right: 0px;
+		}
+	}
+	&--16 {
+		margin-left: -8px;
+		margin-right: -8px;
+		margin-bottom: -16px;
+		
+		> [class^=col] {
+			margin-bottom: 16px;
+			padding-left: 8px;
+			padding-right: 8px;
+		}
+	}
+	&--24 {
+
+		@include mq(xl) {
+			margin-left: -16px;
+			margin-right: -16px;
+		}
+
+		> [class^=col] {
+
+			@include mq(xl) {
+				padding-left: 16px;
+				padding-right: 16px;
+			}
+
+		}
+	}
+	&--32 {
+
+		@include mq(md) {
+			margin-left: -16px;
+			margin-right: -16px;
+		}
+		@include mq(xl) {
+			margin-left: -32px;
+			margin-right: -32px;
+		}
+
+		> [class^=col] {
+
+			@include mq(md) {
+				padding-left: 16px;
+				padding-right: 16px;
+			}
+			@include mq(xl) {
+				padding-left: 32px;
+				padding-right: 32px;
+			}
+
+		}
+	}
+	&--48 {
+
+		@include mq(md) {
+			margin-left: -32px;
+			margin-right: -32px;
+		}
+		@include mq(xl) {
+			margin-left: -48px;
+			margin-right: -48px;
+		}
+
+		> [class^=col] {
+
+			@include mq(md) {
+				padding-left: 32px;
+				padding-right: 32px;
+			}
+			@include mq(xl) {
+				padding-left: 48px;
+				padding-right: 48px;
+			}
+
+		}
+	}
+}
+
+.flex {
+
+	&--center {
+		align-items: center;
+	}
+}

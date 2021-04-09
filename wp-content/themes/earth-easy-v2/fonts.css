@@ -1,0 +1,52 @@
+@font-face {
+    font-family: 'ClarendonTextPro';
+    src: url('./fonts/ClarendonTextPro.eot');
+    src: url('./fonts/ClarendonTextPro.woff2') format('woff2'),
+         url('./fonts/ClarendonTextPro.woff') format('woff'),
+         url('./fonts/ClarendonTextPro.ttf') format('truetype'),
+         url('./fonts/ClarendonTextPro.svg#ClarendonTextPro') format('svg'),
+         url('./fonts/ClarendonTextPro.eot?#iefix') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: 'ClarendonTextPro-Italic';
+    src: url('./fonts/ClarendonTextPro-Italic.eot');
+    src: url('./fonts/ClarendonTextPro-Italic.woff2') format('woff2'),
+         url('./fonts/ClarendonTextPro-Italic.woff') format('woff'),
+         url('./fonts/ClarendonTextPro-Italic.ttf') format('truetype'),
+         url('./fonts/ClarendonTextPro-Italic.svg#ClarendonTextPro-Italic') format('svg'),
+         url('./fonts/ClarendonTextPro-Italic.eot?#iefix') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: 'ClarendonTextPro-Bold';
+    src: url('./fonts/ClarendonTextPro-Bold.eot');
+    src: url('./fonts/ClarendonTextPro-Bold.woff2') format('woff2'),
+         url('./fonts/ClarendonTextPro-Bold.woff') format('woff'),
+         url('./fonts/ClarendonTextPro-Bold.ttf') format('truetype'),
+         url('./fonts/ClarendonTextPro-Bold.svg#ClarendonTextPro-Bold') format('svg'),
+         url('./fonts/ClarendonTextPro-Bold.eot?#iefix') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: 'ClarendonTextPro-BoldItalic';
+    src: url('./fonts/ClarendonTextPro-BoldItalic.eot');
+    src: url('./fonts/ClarendonTextPro-BoldItalic.woff2') format('woff2'),
+         url('./fonts/ClarendonTextPro-BoldItalic.woff') format('woff'),
+         url('./fonts/ClarendonTextPro-BoldItalic.ttf') format('truetype'),
+         url('./fonts/ClarendonTextPro-BoldItalic.svg#ClarendonTextPro-BoldItalic') format('svg'),
+         url('./fonts/ClarendonTextPro-BoldItalic.eot?#iefix') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  

@@ -1,0 +1,68 @@
+.hide {
+    
+    &--sr {
+    	border: 0;
+	    clip: rect(0 0 0 0);
+	    height: 1px;
+	    margin: -1px;
+	    overflow: hidden;
+	    padding: 0;
+	    position: absolute;
+	    width: 1px;
+    }
+    &--mobile {
+    	display: none;
+
+    	@include mq(lg) {
+    		display: block;
+    	}
+    }
+}
+
+$pad: 16px;
+
+.pad--t-1 {
+	padding-top: $pad;
+}
+.pad--b-1 {
+	padding-bottom: $pad;
+}
+.pad--t-2 {
+	padding-top: $pad * 2;
+}
+.pad--b-2 {
+	padding-bottom: $pad * 2;
+}
+.pad--t-3 {
+	padding-top: $pad * 3;
+}
+.pad--b-3 {
+	padding-bottom: $pad * 3;
+}
+.pad--t-4 {
+	padding-top: $pad * 4;
+}
+.pad--b-4 {
+	padding-bottom: $pad * 4;
+}
+.pad--t-5 {
+	padding-top: $pad * 5;
+}
+.pad--b-5 {
+	padding-bottom: $pad * 5;
+}
+
+.bg--ltrgray {
+	background: $ltrgray;
+	border-top: 1px solid $ltgray;
+	border-bottom: 1px solid $ltgray;
+
+	+ .bg--ltrgray {
+		border-top: 0;
+	}
+}
+
+
+.text--center {
+	text-align: center;
+}

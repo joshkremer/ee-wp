@@ -1,0 +1,27 @@
+@mixin lay-z-index($layers, $z: 0) {
+    $len: length($layers);
+
+    @each $layer in $layers {
+      $idx: index($layers, $layer);
+      #{$layer} {
+        z-index: $z + $len - $idx;
+      }
+    }
+}
+@include lay-z-index(
+	// '.site-nav__wrapper'
+	'.site-header'
+	'.page-content'
+	'.content'
+	'.site-footer'
+	'#slider'
+	,100
+);
+@include lay-z-index(
+	'.site-header .nav--toggle'
+	'.site-header .site-nav'
+	'.site-header__wrapper'
+	'.site-header .slider__f'
+	'.site-header .slider'
+	,1000
+);

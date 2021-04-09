@@ -1,0 +1,274 @@
+.banner {
+	background-size: cover;
+	background-position: center center;
+	position: relative;
+	width: 100%;
+	height: 280px;
+
+	@include mq(sm) {
+		height: 320px;
+	}
+	@include mq(md) {
+		height: calc(60vh - 85px);
+		min-height: 380px;
+	}
+	@include mq(lg) {
+		height: calc(100vh - 85px);
+		min-height: 480px;
+	}
+	@include mq(xl) {
+		height: calc(100vh - 100px);
+	}
+
+	.logged-in & {
+		@include mq(lg) {
+			height: calc(100vh - 117px);
+		}
+		@include mq(xl) {
+			height: calc(100vh - 132px);
+		}
+	}
+
+	&:before {
+		background: rgba($gray, 0.3);
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 2;
+	}
+
+	> .container {
+		position: absolute;
+		top: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 100%;
+		height: 100%;
+		z-index: 3;
+	}
+	
+	&__content {
+		padding: 0 20px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		text-align: center;
+		transform: translate(-50%, -50%);
+		width: 100%;
+		max-width: 800px;
+		z-index: 1;
+
+		@include mq(sm) {
+			padding: 0 40px;
+		}
+	}
+	&__title {
+		@include font-size($l1-font-sizes);
+		color: $white;
+		font-family: $serif;
+		font-weight: 300;
+		letter-spacing: 0;
+		margin-bottom: 0;
+	}
+	&__description {
+		@include font-size($m1-font-sizes);
+		color: $white;
+		display: none;
+		font-family: $serif;
+		margin: 10px 0 0;
+
+		@include mq(sm) {
+			display: block;
+		}
+	}
+	&__date {
+		@include font-size($s2-font-sizes);
+		color: $white;
+		font-weight: 500;
+		margin-top: 10px;
+
+		svg,
+		span {
+			display: inline-block;
+			vertical-align: middle;
+		}
+		svg {
+			fill: lighten($mdgray, 10%);
+		}
+	}
+	&__meta {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		justify-content: center;
+		align-items: center;
+		padding: 0 10px;
+		position: absolute;
+		top: 10px;
+		left: 0;
+		width: 100%;
+		z-index: 1;
+
+		@include mq(md) {
+			padding: 0 30px;
+			top: 15px;
+		}
+	}
+	&__type {
+		border: 2px solid $white;
+		border-radius: 30px;
+		color: $white;
+		display: inline-block;
+		font-size: 8px;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		margin-right: 8px;
+		padding: 2px 5px;
+		text-transform: uppercase;
+		transition: color 0.3s ease, background 0.3s ease;
+
+		@include mq(md) {
+			font-size: 9px;
+			margin-right: $pad;
+		}
+
+		&:hover {
+			background: $white;
+			color: $gray;
+		}
+	}
+	&__categories {
+		display: inline-block;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+
+		li {
+			margin-bottom: 0;
+			white-space: nowrap;
+		}
+		a {
+			color: $white;
+			display: block;
+			font-size: 8px;
+			font-weight: 700;
+			letter-spacing: 0.1em;
+			text-transform: uppercase;
+
+			@include mq(md) {
+				font-size: 9px;
+			}
+
+			&:hover {
+				color: $purple;
+
+				path {
+					fill: $purple;
+				}
+			}
+		}
+		svg {
+			display: inline-block;
+			fill: $white;
+			transition: fill 0.3s ease;
+			vertical-align: middle;
+		}
+		img,
+		span {
+			display: inline-block;
+			vertical-align: middle;
+		}
+		path {
+			transition: fill 0.3s ease;
+		}
+	}
+
+	&__cta {
+		@include font-size($s1-font-sizes);
+		background: url(img/guide-banner-texture.jpg) center center repeat-x;
+		background-size: auto 100%;
+		color: $white;
+		padding: 10px 0;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		z-index: 4;
+
+
+		@include mq(md) {
+			padding: 13px 0;
+			height: 56px;
+		}
+		@include mq(lg) {
+			background-size: auto auto;
+		}
+
+		p {
+			@include mq(md) {
+				display: inline-block;
+				margin-bottom: 0;
+				margin-right: 20px;
+				vertical-align: middle;
+			}
+		}
+	}
+	&__arrow {
+		display: none;
+		margin: 20px auto 0;
+		position: relative;
+
+		@include mq(lg) {
+			display: block;
+			margin-top: 40px;
+		}
+	}
+
+	&__video {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 1;
+
+		> div {
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	.tags {
+		display: none;
+		margin-left: auto;
+
+		@include mq(xs) {
+			display: block;
+		}
+	}
+
+
+
+	&--post {
+		
+		
+		.post-link {
+			background: none;
+			position: absolute;
+			top: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 100%;
+			height: 100%;
+			z-index: 3;
+		}
+		.post-link__content {
+			padding-left: 40px;
+			padding-right: 40px;
+		}
+	}
+
+}

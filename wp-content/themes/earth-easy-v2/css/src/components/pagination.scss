@@ -1,0 +1,133 @@
+.pagination {
+	border-top: 1px solid $ltgray;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: stretch;
+
+	@include mq(lg) {
+		border-left: 1px solid $ltgray;
+		border-right: 1px solid $ltgray;
+	}
+
+	.is--fixed & {
+		@include mq(lg) {
+			height: 50px;
+		}
+	}
+
+	a {
+		display: block;
+		padding: 12px;
+		position: relative;
+		text-align: center;
+		transition: background 0.3s ease;
+		width: 33.333%;
+
+		@include mq(lg) {
+			line-height: 76px;
+			padding: 0;
+			width: 60px;
+			height: 76px;
+		}
+
+		&:not(:last-child) {
+			border-right: 1px solid $ltgray;
+		}
+		&:hover {
+			background: $purple;
+
+			svg {
+				fill: $white;
+			}
+			.pagination__title {
+				opacity: 1;
+				transform: translateY(0);
+				visibility: visible;
+			}
+		}
+		&:first-child {
+			.pagination__title {
+				left: 10px;
+
+				@include mq(lg) {
+					left: 50%;
+					transform: translateX(-50%);
+				}
+			}
+		}
+		&:last-child {
+			.pagination__title {
+				right: 10px;
+
+				@include mq(xxl) {
+					left: 50%;
+					transform: translateX(-50%);
+				}
+
+				&:before {
+					@include mq(lg) {
+						left: 90%;
+					}
+					@include mq(xxl) {
+						left: 50%;
+					}
+				}
+			}
+		}
+
+		.is--fixed & {
+			@include mq(lg) {
+				line-height: 50px;
+				height: 50px;
+			}
+		}
+	}
+	svg {
+		display: inline-block;
+		transition: fill 0.3s ease;
+		vertical-align: middle;
+	}
+
+	&__title {
+		background: $gray;
+		border-radius: 3px;
+		color: $white;
+		display: block;
+		font-size: 11px;
+		line-height: 1.4;
+		opacity: 0;
+		padding: 5px;
+		position: absolute;
+		top: 52px;
+		transform: translateY(10px);
+		transition: 0.3s ease;
+		visibility: hidden;
+		width: calc(100% - 10px);
+		z-index: 1;
+
+		@include mq(lg) {
+			font-size: 13px;
+			top: 82px;
+			width: 220px;
+		}
+
+		.is--fixed & {
+			@include mq(lg) {
+				top: 55px;
+			}
+		}
+
+		&:before {
+			border-bottom: 5px solid $gray;
+			border-left: 5px solid transparent;
+			border-right: 5px solid transparent;
+			content: '';
+			position: absolute;
+			top: -5px;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+	}
+}

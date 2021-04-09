@@ -1,0 +1,49 @@
+.product-box {
+	text-align: center;
+	
+	&__title {
+		@include font-size($s1-font-sizes);
+		margin: 0;
+
+		&--alt {
+			font-weight: 500;
+			margin-bottom: 10px;
+			text-transform: uppercase;
+		}
+	}
+	&__image {
+		margin-bottom: 10px;
+		position: relative;
+
+		@include mq(sm) {
+			margin-bottom: $pad;
+		}
+		@include mq(md) {
+			margin-bottom: 20px;
+		}
+		@include mq(lg) {
+			margin-bottom: 30px;
+		}
+
+		&--alt {
+			border: 1px solid $ltgray;
+		}
+
+		img {
+			display: block;
+			width: 100%;
+			height: auto;
+		}
+
+		.btn {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+		}
+	}
+	&__description {
+		@include font-size($s1-font-sizes);
+		text-align: left;
+	}
+}

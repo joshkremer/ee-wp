@@ -1,0 +1,79 @@
+.btn {
+	-webkit-appearance: none;
+	background: none;
+	border: 0;
+	border-radius: 0;
+	display: inline-block;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	padding: 6px 10px;
+	text-align: center;
+	text-transform: uppercase;
+	transition: color 0.3s ease, background 0.3s ease;
+	vertical-align: middle;
+
+	@include mq(md) {
+		padding: 10px 16px;
+	}
+
+	&--sm {
+		font-size: 9px;
+		padding: 4px 8px;
+
+		@include mq(md) {
+			padding: 6px 10px;
+		}
+	}
+
+	&--black {
+		background: $gray;
+		color: $white;
+
+		&:hover {
+			background: $purple;
+			color: $white;
+		}
+	}
+	&--white {
+		background: $white;
+		color: $gray;
+
+		&:hover {
+			background: $purple;
+			color: $white;
+		}
+	}
+
+	&--ghost {
+		background: none;
+		border-width: 2px;
+		border-style: solid;
+
+		&.btn--white {
+			border-color: $white;
+			color: $white;
+
+			&:hover {
+				background: $white;
+				color: $gray;
+			}
+		}
+		&.btn--black {
+			border-color: $gray;
+			color: $gray;
+
+			&:hover {
+				background: $gray;
+				color: $white;
+			}
+		}
+	}
+
+	&--wide {
+		width: 70%;
+	}
+	&--full {
+		width: 100%;
+	}
+}

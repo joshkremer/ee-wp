@@ -1,0 +1,55 @@
+{# {% extends "base.twig" %} #}
+{% block content %}
+{% if posts %}
+
+	<section class="content pad--b-1">
+		<div class="container">
+			<div class="row row--16">
+				{% for article in latest_articles %}
+					{% set featured = TimberPost(article) %}
+					<div class="col-sm-6">
+						<article class="post-link">
+							<a class="post-link__hover post-link__hover--lg lazyload" href="{{featured.link}}" data-bg="({{TimberImage(featured.featured_image).src|resize(720,450)}}">
+								<div class="post-link__content">
+									<h3 class="post-link__title">{{featured.title}}</h3>
+								</div>
+							</a>
+							<footer class="post-link__meta">
+								{% if featured.post_type == 'ee_guides' %}
+									<a class="post-link__type" href="{{site.url}}/guides">Guides</a>
+								{% elseif featured.post_type == 'ee_articles' %}
+									<a class="post-link__type" href="{{site.url}}/articles">Articles</a>
+								{% endif %}
+								<div class="tags tags--toggle">
+									<button class="tags__btn">
+										<svg viewBox="0 0 12 13" width="12" height="13" class="icon--hash" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+										    <use xlink:href="#icon-hash-13"></use>
+										</svg>
+									</button>
+								</div>
+							</footer>
+							{#
+							<div class="tags__menu">
+								<div class="tags__menu--inner">
+									<p>Tagged With</p>
+									<ul class="tags__list">
+										{% for tag in featured.tags %}
+											<li><a href="{{tag.link}}">{{tag.name}}</a></li>
+										{% endfor %}
+									</ul>
+									<button class="tags__close" title="Close">
+										<svg viewBox="0 0 27 27" width="27" height="27" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+										    <use xlink:href="#icon-close-circle"></use>
+										</svg>
+									</button>
+								</div>
+							</div>
+							#}
+						</article>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+
+{% endif %}

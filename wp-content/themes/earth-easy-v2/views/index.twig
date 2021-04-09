@@ -1,0 +1,69 @@
+
+{% extends "base.twig" %}
+
+{% block content %}
+	<style>
+		header.site-header.header--down {
+		    box-shadow: 0 1px 4px 0 rgba(0,0,0,.22);
+		}
+	</style>
+    <div class="container">
+		<br>
+		<br>
+	{% if category_posts|length == 0 %}
+		<h1 class="search-page-title-custom">No matches found.</h1>
+	</div>
+	{% else %}
+		<h2 class="search-page-title-custom">Search Results for "{{search}}"</h2>
+		<div>
+			<p>Home/Search</p>
+		</div>
+		<div class="container-fluid archive-container">{% for cat_post in category_posts %}{% set featured = TimberPost(cat_post) %}<div class="grid-item {% if cat_name|default %} {{cat_name.slug}} {% endif %}col-sm-4">
+			{% if featured.post_type == 'ee_articles' %}
+			{% set cat_name =  cat_post.get_terms('articles-categories')|first %}
+			{% elseif featured.post_type == 'ee_guides' %}
+			{% set cat_name =  cat_post.get_terms('guides-categories')|first %}
+			{% endif %}
+			<a class="post-link__hover lazyload" href="{% if featured.post_type == 'ee_guides' %}{{site.link}}/guides/{{featured.slug|lower}}{% elseif featured.post_type == 'ee_articles' %}{{site.link}}/articles/{{featured.slug|lower}}{% endif %}" data-bg="{{TimberImage(featured.featured_image).src|resize(720,450)}}">
+								<div class="post-link__content">
+									<h3 class="post-link__title">{{ featured }}</h3>
+								</div>
+							</a>
+			</div>{% endfor %}
+			<footer class="post-link__meta">
+				{% if featured.post_type == 'ee_guides' %}
+					<a class="post-link__type" href="{{site.url}}/guides">Guides</a>
+				{% elseif featured.post_type == 'ee_articles' %}
+					<a class="post-link__type" href="{{site.url}}/articles">Articles</a>
+				{% endif %}
+				<div class="tags tags--toggle">
+					 
+				</div>
+				<ul class="selector__categories">
+
+									{% if cat_name|default %}
+										<li>
+											<input type="radio" id="filter-{{cat_name|lower|replace({' ':'-'})}}" name="filter_category" value="{{cat_name}}" />
+											<a data-id="{{featured.id}}" data-type="{% if featured.post_type == 'ee_guides' %}{{site.link}}ee_guides
+											{% elseif featured.post_type == 'ee_articles' %}ee_articles
+											{% endif %}" target="_self" href="
+											{% if featured.post_type == 'ee_guides' %}{{site.link}}/guides-categories/{{cat_name.slug|lower}}
+											{% elseif featured.post_type == 'ee_articles' %}{{site.link}}/articles-categories/{{cat_name.slug|lower}}
+											{% endif %}">
+												<label for="filter-{{cat_name|lower|replace({' ':'-'})}}">
+													{% if featured.post_type == 'ee_articles' %}
+														<img src="{{cat_name.category_icon.url}}" />
+													{% elseif featured.post_type == 'ee_guides' %}
+														<img src="{{cat_name.category_icon.url}}"  />
+													{% endif %}
+													<span>{{cat_name}}</span>
+												</label>
+											</a>
+										</li>
+									{% endif %}
+								</ul>
+			</footer>
+		</div>
+	{% endif %}
+</div>
+{% endblock %}

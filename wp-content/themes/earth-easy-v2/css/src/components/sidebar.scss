@@ -1,0 +1,16 @@
+.sidebar {
+	margin-left: 250px;
+	position: absolute;
+	top: 54px;
+	right: 30px;
+	width: 20.5%;
+	max-width: 280px;
+
+	@include mq(xl) {
+		width: 17.5%;
+		max-width: 280px;
+	}
+	@include mq(xxl) {
+		width: 270px;
+	}
+}

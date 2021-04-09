@@ -1,0 +1,174 @@
+.search {
+	margin-top: 10px;
+	position: relative;
+	text-align: center;
+
+	.js & {
+		margin-top: 0;
+	}
+
+	label {
+		display: inline-block;
+		font-size: 12px;
+		margin-right: 5px;
+		vertical-align: middle;
+
+		@include mq(sm) {
+			margin-right: 0;
+		}
+	}
+	input[type="search"] {
+		font-size: 12px;
+		margin-bottom: 5px;
+		padding-right: 33px;
+		text-align: left;
+
+		@include mq(sm) {
+			padding-right: 224px;
+		}
+
+		.js & {
+			padding-right: 59px;
+
+			@include mq(sm) {
+				padding-right: 250px;
+			}
+			@include mq(md) {
+				border: 0;
+				font-size: 25px;
+				margin-bottom: 0;
+				padding-right: 290px;
+			}
+		}
+	}
+	&__shop {
+		@include mq(sm) {
+			position: absolute;
+			top: 11px;
+			right: 194px;
+		}
+		.js & {
+			@include mq(md) {
+				top: 17px;
+				right: 224px;
+			}
+		}
+	}
+	&__posts {
+		@include mq(sm) {
+			position: absolute;
+			top: 11px;
+			right: 59px;
+		}
+		.js & {
+			@include mq(md) {
+				top: 17px;
+				right: 84px;
+			}
+		}
+	}
+	&__btn {
+		-webkit-appearance: none;
+		background: transparent;
+		border: 0;
+		border-radius: 0;
+		font-size: 0;
+		padding: 0;
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 27px;
+		height: 37px;
+
+		.js & {
+			right: 27px;
+
+			@include mq(md) {
+				right: 30px;
+				width: 50px;
+				height: 50px;
+			}
+		}
+
+		&:hover {
+			path {
+				fill: $purple;
+			}
+		}
+		path {
+			transition: fill 0.3s ease;
+		}
+		svg {
+			.js & {
+				width: 26px;
+				height: 26px;
+			}
+		}
+
+	}
+	&__close {
+		-webkit-appearance: none;
+		background: transparent;
+		border: 0;
+		border-radius: 0;
+		display: none;
+		font-size: 0;
+		padding: 0;
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 27px;
+		height: 37px;
+		
+		.js & {
+			display: block;
+
+			@include mq(md) {
+				width: 30px;
+				height: 50px;
+			}
+		}
+	}
+	&__container {
+		.js & {
+			padding-top: 5px;
+			padding-bottom: 5px;
+			opacity: 0;
+			position: absolute;
+			top: 190px;
+			left: 50%;
+			transform: translate(-50%, 0);
+			transition: 0.3s ease;
+			visibility: hidden;
+			z-index: 1002;
+
+			@include mq(md) {
+				top: 16px;
+			}
+			@include mq(xl) {
+				top: 19px;
+			}
+		}
+		&.is--open {
+			opacity: 1;
+			transform: translate(-50%, 0);
+			visibility: visible;
+		}
+	}
+}
+.search__toggle {
+
+	&:hover {
+		path {
+			fill: $purple;
+		}
+	}
+	
+	svg {
+		position: relative;
+		top: 2px;
+	}
+	path {
+		transition: fill 0.3s ease;
+	}
+}

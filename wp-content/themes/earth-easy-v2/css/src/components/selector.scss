@@ -1,0 +1,449 @@
+.selector {
+	padding-top: $pad;
+	position: relative;
+	text-align: center;
+
+	@include mq(md) {
+		padding-top: $pad * 2;
+	}
+		
+	&__form {
+		margin-bottom: 10px;
+
+		@include mq(lg) {
+			border-right: 1px solid $ltgray;
+			display: inline-block;
+			margin: 0 20px 0 0;
+		}
+
+		.btn {
+			vertical-align: middle;
+
+			.js & {
+				display: none;
+			}
+		}
+	}
+	&__type {
+		margin: 0 0 10px;
+
+		@include mq(md) {
+			display: inline-block;
+			margin: 0 10px 0 0;
+			vertical-align: middle;
+		}
+		@include mq(xl) {
+			margin-right: 20px;
+		}
+
+		.js & {
+			@include mq(sm) {
+				display: inline-block;
+				margin: 0 10px 0 0;
+				vertical-align: middle;
+			}
+			@include mq(lg) {
+				margin-right: 25px;
+			}
+		}
+
+		ul {
+			font-size: 0;
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+		li {
+			display: inline-block;
+			@include font-size($s2-font-sizes);
+
+			&:not(:last-child) {
+				margin-right: 8px;
+
+				@include mq(xl) {
+					margin-right: 20px;
+				}
+			}
+		}
+
+		input[type="radio"] {
+			display: none;
+		}
+		input[type="radio"]:checked + label {
+			color: $purple;
+		}
+		label {
+			cursor: pointer;
+			font-weight: 700;
+			letter-spacing: 0.1em;
+			text-transform: uppercase;
+
+			&:hover {
+				color: $purple;
+			}
+		}
+	}
+	&__type-toggle {
+		@include font-size($s2-font-sizes);
+		-webkit-appearance: none;
+		background: none;
+		border: 0;
+		border-radius: 0;
+		display: none;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		padding: 0;
+		text-transform: uppercase;
+
+
+
+		&:hover {
+			color: $mdgray;
+		}
+
+		.js & {
+			@include mq(sm) {
+				display: inline-block;
+				vertical-align: middle;
+			}
+			@include mq(lg) {
+				margin-top: -2px;
+			}
+		}
+	}
+	&__type-icon {
+		display: none;
+		fill: $purple;
+		width: 2px;
+		height: 10px;
+
+		.js & {
+			@include mq(sm) {
+				display: inline-block;
+				vertical-align: middle;
+			}
+			@include mq(lg) {
+				margin-top: -3px;
+			}
+		}
+	}
+	&__type-list {
+		.js & {
+			@include mq(sm) {
+				display: none;
+			}
+		}
+	}
+	&__heading {
+		color: $mdgray;
+		font-size: 9px;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+
+		@include mq(md) {
+			display: inline-block;
+			margin: 0 10px 0 0;
+			vertical-align: middle;
+		}
+		@include mq(xl) {
+			margin-right: 20px;
+		}
+
+		/*
+		.js & {
+			@include mq(sm) {
+				display: inline-block;
+				margin: 0 10px 0 0;
+				vertical-align: middle;
+			}
+			@include mq(lg) {
+				margin-right: 25px;
+			}
+		}*/
+	}
+	&__categories {
+		font-size: 0;
+		list-style: none;
+		margin: 0 0 10px;
+		padding: 0;
+
+		@include mq(md) {
+			display: inline-block;
+			margin: 0 10px 0 0;
+			vertical-align: middle;
+		}
+		@include mq(xl) {
+			margin-right: 20px;
+		}
+
+		.js & {
+			@include mq(sm) {
+				display: inline-block;
+				margin: 0 10px 0 0;
+				vertical-align: middle;
+			}
+			@include mq(lg) {
+				margin-right: 25px;
+			}
+		}
+
+		li {
+			@include font-size($s2-font-sizes);
+			display: inline-block;
+			margin-bottom: 10px;
+
+			@include mq(md) {
+				margin-bottom: 0;
+			}
+
+			&:not(:last-child) {
+				margin-right: 8px;
+
+				@include mq(md) {
+					margin-right: 20px;
+				}
+
+				.js & {
+					@include mq(lg) {
+						margin-right: 25px;
+					}
+				}
+			}
+		}
+
+		input[type="radio"] {
+			display: none;
+		}
+		input[type="radio"]:checked + label {
+			color: $purple;
+
+			img {
+				opacity: 0.4;
+			}
+			path {
+				fill: $purple;
+			}
+		}
+		label {
+			cursor: pointer;
+			font-weight: 500;
+			letter-spacing: 0.1em;
+			text-transform: uppercase;
+			transition: color 0.3s ease;
+
+			&:hover {
+				color: $purple;
+
+				img {
+					opacity: 0.4;
+				}
+				path {
+					fill: $purple;
+				}
+			}
+		}
+		img,
+		span,
+		svg {
+			display: inline-block;
+			vertical-align: middle;
+		}
+		img,
+		svg {
+			margin-right: 6px;
+			transition: opacity 0.3s ease;
+		}
+		path {
+			transition: fill 0.3s ease;
+		}
+	}
+	&__nav {
+		display: inline-block;
+		padding-bottom: $pad;
+		vertical-align: top;
+
+		@include mq(md) {
+			padding-bottom: $pad * 2;
+		}
+
+		&:not(:last-child) {
+			margin-right: 8px;
+
+			@include mq(xl) {
+				margin-right: 20px;
+			}
+
+			.js & {
+				@include mq(lg) {
+					margin-right: 25px;
+				}
+			}
+		}
+
+		&:hover {
+			.selector__menu {
+				opacity: 1;
+				visibility: visible;
+			}
+			.selector__toggle {
+				color: $purple;
+
+				svg {
+					fill: $purple;
+				}
+			}
+		}
+
+		&--tags {
+			ul {
+				column-count: 2;
+				list-style: none;
+				margin: 0 auto;
+				padding: 0;
+				position: relative;
+				max-width: 550px;
+
+				@include mq(md) {
+					column-count: 3;
+				}
+				@include mq(lg) {
+					column-count: 4;
+					max-width: 730px;
+				}
+			}
+			li {
+				-webkit-column-break-inside: avoid;
+				page-break-inside: avoid;
+            	break-inside: avoid;
+				font-size: 13px;
+				margin: 0;
+				padding: 3px 0;
+
+				a {
+					color: $gray;
+
+					&:hover {
+						color: $purple;
+					}
+				}
+			}
+
+			span {
+				background: $ltrgray;
+				color: $mdgray;
+				border-radius: 30px;
+				display: inline-block;
+				@include font-size($s2-font-sizes);
+				font-weight: 500;
+				padding: 2px 6px;
+			}
+		}
+	}
+	&__toggle {
+		color: $gray;
+		@include font-size($s2-font-sizes);
+		font-weight: 500;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+
+		&:hover {
+			color: $purple;
+
+			svg {
+				fill: $purple;
+			}
+		}
+		.icon--hash {
+			fill: $gray;
+		}
+		.icon--arrow {
+			position: relative;
+			top: -3px;
+			transition: fill 0.3s ease;
+		}
+	}
+	&__menu {
+		background: $white;
+		border-top: 1px solid $ltgray;
+		opacity: 0;
+		padding-top: $pad;
+		padding-bottom: $pad * 2;
+		padding-left: 20px;
+		padding-right: 20px;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		text-align: left;
+		transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+		visibility: hidden;
+		width: 100%;
+		z-index: 3;
+
+		@include mq(md) {
+			padding-top: $pad * 2;
+			padding-bottom: $pad * 4;
+		}
+
+		&:before {
+			background: $white;
+			border-top: 1px solid $ltgray;
+			box-shadow: 0 3px 4px rgba($gray, 0.2);
+			content: '';
+			position: absolute;
+			left: -50%;
+			top: -1px;
+			width: 200%;
+			height: calc(100% + 1px);
+		}
+		
+		h6 {
+			@include font-size($s2-font-sizes);
+			color: $mdgray;
+			font-weight: 500;
+			letter-spacing: 0.1em;
+			margin-bottom: $pad;
+			text-align: center;
+			text-transform: uppercase;
+		}
+		.post-link {
+			margin-bottom: $pad;
+		}
+		.row {
+			&:before {
+				@include mq(md) {
+					background: $ltgray;
+					content: '';
+					position: absolute;
+					top: 7%;
+					right: 24%;
+					width: 1px;
+					height: 86%;
+					z-index: 1;
+				}
+			}
+		}
+		.col-3 {
+			padding-top: $pad;
+			position: relative;
+
+			@include mq(md) {
+				padding-top: 0;
+			}
+
+			&:before {
+				background: $ltgray;
+				content: '';
+				position: absolute;
+				top: 0;
+				left: -30px;
+				width: calc(100% + 60px);
+				height: 1px;
+				z-index: 1;
+
+				@include mq(md) {
+					display: none;
+				}
+			}
+		}
+	}
+}

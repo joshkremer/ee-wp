@@ -1,0 +1,71 @@
+$sans: "Gotham SSm A", "Gotham SSm B", sans-serif;
+$serif: "Hoefler Titling A", "Hoefler Titling B", serif;
+
+
+
+$body-font-sizes: (
+  null: (14px, 1.7),
+  md: (15px),
+  xl: (16px)
+);
+$l1-font-sizes: (
+  null: (24px, 1),
+  sm: (30px),
+  md: (36px),
+  lg: (42px),
+  xl: (46px)
+);
+$l2-font-sizes: (
+  null: (20px, 1),
+  sm: (24px),
+  md: (28px),
+  lg: (32px),
+  xl: (36px)
+);
+$l3-font-sizes: (
+  null: (19px, 1),
+  sm: (21px),
+  md: (23px),
+  lg: (26px),
+  xl: (28px)
+);
+$l4-font-sizes: (
+  null: (17px, 1),
+  sm: (19px),
+  md: (21px),
+  lg: (24px),
+  xl: (26px)
+);
+$m1-font-sizes: (
+  null: (16px, 1.5),
+  sm: (18px),
+  md: (20px),
+  xl: (23px)
+);
+$m2-font-sizes: (
+  null: (15px, 1.5),
+  sm: (16px),
+  md: (17px),
+  xl: (19px)
+);
+$m3-font-sizes: (
+  null: (15px, 1.4),
+  sm: (16px),
+  md: (17px),
+  xl: (18px)
+);
+$m4-font-sizes: (
+  null: (14px, 1.4),
+  sm: (15px),
+  md: (16px),
+  xl: (17px)
+);
+$s1-font-sizes: (
+  null: (12px, 1.5),
+  md: (13px),
+  xl: (14px)
+);
+$s2-font-sizes: (
+  null: (10px, 1.4),
+  md: (11px),
+);

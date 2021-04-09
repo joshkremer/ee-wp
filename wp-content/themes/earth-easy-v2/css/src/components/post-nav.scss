@@ -1,0 +1,83 @@
+.post-nav {
+	list-style: none;
+	margin: 0;
+	padding: $pad/2 0 0;
+	text-align: center;
+
+	@include mq(sm) {
+		padding: $pad/2 0;
+	}
+	@include mq(lg) {
+		padding: 0;
+	}
+
+	li {
+		margin: 0;
+		padding: 0 $pad $pad/2;
+
+		@include mq(sm) {
+			display: inline-block;
+			padding: $pad/2;
+			vertical-align: middle;
+		}
+		@include mq(lg) {
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+
+		&.active {
+			svg {
+				&.icon {
+					display: none;
+				}
+				&.icon--filled {
+					display: inline-block;
+				}
+			}
+		}
+	}
+	a {
+		@include font-size($s2-font-sizes);
+		color: $gray;
+		font-weight: 500;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+
+		@include mq(lg) {
+			line-height: 76px;
+			height: 76px;
+		}
+
+		&:hover,
+		&.is--active {
+			color: $purple;
+
+			svg {
+				fill: $purple;
+			}
+		}
+
+		.is--fixed & {
+			@include mq(lg) {
+				line-height: 50px;
+				height: 50px;
+			}
+		}
+	}
+	svg,
+	share {
+		display: inline-block;
+		vertical-align: middle;
+	}
+	svg {
+		transition: fill 0.3s ease;
+
+		&.icon {
+			fill: lighten($mdgray, 5%);
+		}
+		&.icon--filled {
+			display: none;
+			fill: $gray;
+		}
+	}
+}

@@ -1,0 +1,47 @@
+.cta {
+	border-top: 1px solid $ltgray;
+	
+	.row {
+		margin-bottom: 0;
+	}
+	.col-sm-6 {
+		padding: $pad * 2;
+		text-align: center;
+
+		@include mq(md) {
+			padding: $pad * 3;
+			max-width: 540px;
+		}
+		@include mq(lg) {
+			padding: $pad * 5 $pad * 3;
+			max-width: 600px;
+		}
+		@include mq(xl) {
+			max-width: 760px;
+		}
+
+		&:first-child {
+			border-bottom: 1px solid $ltgray;
+
+			@include mq(sm) {
+				border-bottom: 0;
+				border-right: 1px solid $ltgray;
+			}
+		}
+	}
+
+	&__title {
+		@include font-size($m2-font-sizes);
+		font-weight: 500;
+		letter-spacing: 0.1em;
+		margin-bottom: 5px;
+		text-transform: uppercase;
+	}
+	&__description {
+		@include font-size($s1-font-sizes);
+		margin-bottom: 20px;
+	}
+	.btn {
+		max-width: 225px;
+	}
+}

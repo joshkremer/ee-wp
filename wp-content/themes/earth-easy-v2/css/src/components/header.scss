@@ -1,0 +1,161 @@
+.site-header {
+	background: $white url(img/header-texture.jpg) center top no-repeat;
+	padding: 20px 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	transition: position 0.3s ease;
+	width: 100%;
+
+	@include mq(md) {
+		height: 85px;
+	}
+	@include mq(xl) {
+		background-size: 100% auto;
+		height: 100px;
+	}
+
+	.js & {
+		@include mq(md) {
+			position: fixed;
+    		transition: top 0.4s ease;
+		}
+	}
+	.js .logged-in & {
+		@include mq(md) {
+			top: 32px;
+		}
+	}
+	&.header--up {
+		.js .logged-in & {
+			@include mq(md) {
+				top: -85px;
+			}
+			@include mq(xl) {
+				top: -100px;
+			}
+		}
+	}
+	&.header--down {
+		.js & {
+			box-shadow: 0 0 20px rgba($gray, 0.2);
+		}
+	}
+
+	.container {
+		&:first-child {
+			@include mq(md) {
+				height: 45px;
+			}
+		}
+	}
+
+	&__logo {
+		display: block;
+		margin: 0 auto 20px;
+		position: relative;
+		width: 140px;
+		height: 30px;
+
+		@include mq(md) {
+			margin: 0;
+			position: absolute;
+			bottom: -18px;
+			left: 30px;
+			transform: translateY(-50%);
+			z-index: 1;
+		}
+		@include mq(xl) {
+			bottom: -24px;
+		}
+
+		.js & {
+			margin: 0;
+		}
+	}
+
+	&__toggle {
+		border: 0;
+		background: 0 0;
+		display: none;
+		outline: 0;
+		padding: 0;
+		position: absolute;
+		top: 6px;
+		right: 20px;
+		transition: background .2s ease;
+		width: 26px;
+		height: 18px;
+		z-index: 1001;
+
+		.js & {
+			display: block;
+
+			@include mq(md) {
+				display: none;
+			}
+		}
+
+		&:hover {
+			span,
+			span:after,
+			span:before {
+				background: $purple;
+			}
+		}
+
+		span {
+			position: relative;
+			top: 8px;
+		}
+		span,
+		span:after,
+		span:before {
+		    background: $gray;
+		    transition: .3s ease;
+		    width: 26px;
+		    height: 2px;
+		    display: block;
+
+		    .single &,
+		    .page-template-template-blog & {
+		    	background: $white;
+		    }
+		    .nav--open &,
+		    .single .is--fixed &,
+			.page-template-template-blog .is--fixed & {
+		    	background: $gray;
+		    }
+		}
+		span:after,
+		span:before {
+			content: '';
+			position: absolute;
+			left: 0;
+		}
+		span:before {
+			top: 6px;
+		}
+		span:after {
+			top: -6px
+		}
+
+		.nav--open & {
+			span {
+				background: 0 !important;
+
+				&:before,
+				&:after {
+					transform-origin: 50% 50%;
+					top: 0;
+				}
+				&:before {
+					transform: rotate3d(0, 0, 1, 45deg);
+				}
+				&:after {
+					transform: rotate3d(0, 0, 1, -45deg);
+				}
+			}
+		}
+	}
+}

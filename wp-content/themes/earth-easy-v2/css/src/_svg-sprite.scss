@@ -1,0 +1,65 @@
+.icon {
+    font-size: 10px;
+}
+
+.icon:before {
+    content:' ';
+    vertical-align:middle;
+    display: inline-block;
+    background-image: url("img/svg/sprite-1480280951.698.svg");
+    background-repeat: no-repeat;
+    background-size: 3.4em 14em;
+}
+
+.no-svg .icon:before {
+    background-image: url("img/svg/sprite-1480280951.698.png");
+}
+
+.icon.icon-calendar:before {
+    background-position: 0em 0em;
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.icon.icon-calendar-hover:before {
+    background-position: 0em -1.5em;
+    width: 0.3em;
+    height: 1.5em;
+}
+
+.icon.icon-info:before {
+    background-position: 0em -3em;
+    width: 3.4em;
+    height: 3.4em;
+}
+
+.icon.icon-minus:before {
+    background-position: 0em -6.4em;
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.icon.icon-minus-hover:before {
+    background-position: 0em -7.9em;
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.icon.icon-plus:before {
+    background-position: 0em -9.4em;
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.icon.icon-plus-hover:before {
+    background-position: 0em -10.9em;
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.icon.icon-reset:before {
+    background-position: 0em -12.4em;
+    width: 1.5em;
+    height: 1.6em;
+}
+
